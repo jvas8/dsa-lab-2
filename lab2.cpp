@@ -39,7 +39,20 @@ User* findUser(User* head, const string& username) {
     }
     return nullptr;
 }
-
+bool authorize(User* head, const string& username, const string& action) {
+    User* user = findUser(head, username);
+    if (user == nullptr){
+        return false;
+    }
+    if (user->role == "admin") {
+        return true;
+    } else if (user->role == "editor") {
+        return (action == "view" || action == "edit" || action == "create");
+    } else if (user->role == "viewer") {
+        return (action == "view");
+    }
+    return false;
+}
 
 
 int main() {
@@ -47,5 +60,10 @@ int main() {
     insertUser(head, "Jeimy", "pass123" , "admin");
     insertUser(head, "Jane", "cats4ever", "editor");
     insertUser(head, "Johnny", "joh12");
+
+
+    cout << "Can Jane create? " << boolalpha << authorize(head, "Jane", "create") << endl;
+    cout << "Can Johnny create? " << authorize(head, "Johnny", "create") << endl;
+
     return 0;
 }
