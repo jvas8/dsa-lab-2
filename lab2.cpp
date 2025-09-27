@@ -16,8 +16,8 @@ struct User {
         next = nullptr;
     }
 };
-bool insertUser(User*& head, const string& username, const string& password, const string& role = "viewer") {
-    User* newUser = new User(username, password, role);
+bool insertUser(User*& head, const string& username, const string& password, const vector<string>& perms = {"view"}) {
+    User* newUser = new User(username, password, perms);
     if (head == nullptr) {
         head = newUser;
         return true;
