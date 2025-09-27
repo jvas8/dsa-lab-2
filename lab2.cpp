@@ -1,17 +1,18 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 struct User {
     string username;
     string password;
-    string role;
+    vector<string> permissions;
     User* next;
 
-    User(const string& u, const string& p, const string& r = "viewer") {
+    User(const string& u, const string& p, const vector<string>& perms = {"view"}) {
         username = u;
         password = p;
-        role = r;
+        permissions = perms;
         next = nullptr;
     }
 };
